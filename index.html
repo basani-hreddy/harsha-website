@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harsha — Builder. Founder. Student.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #7c3aed;
+      --blue:   #3b82f6;
+      --green:  #22c55e;
+      --bg:     #080b12;
+      --bg2:    #0f1420;
+      --border: rgba(255,255,255,0.07);
+      --text:   #e2e8f0;
+      --muted:  #4b5563;
+      --muted2: #1f2937;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8, 11, 18, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 17px; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 14px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 32px 100px;
+      max-width: 860px; margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 12px; color: #a78bfa; font-weight: 600;
+      letter-spacing: 0.5px; margin-bottom: 28px;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 6px var(--green); animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+    h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 800; letter-spacing: -2px; line-height: 1.05;
+      margin-bottom: 22px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 60%, var(--green) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 18px; color: var(--muted); max-width: 560px;
+      margin: 0 auto 40px; line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: 12px; font-size: 14px; font-weight: 600;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: #fff; text-decoration: none; border: none; cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+      box-shadow: 0 0 30px rgba(124,58,237,0.35);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: 12px; font-size: 14px; font-weight: 600;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); color: var(--text);
+      text-decoration: none; transition: border-color 0.15s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-1px); }
+
+    /* ── SECTION SHARED ── */
+    section {
+      max-width: 860px; margin: 0 auto; padding: 80px 32px;
+    }
+    .section-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+      color: #a78bfa; font-weight: 700; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 14px;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 15px; max-width: 520px; line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .divider {
+      border: none; border-top: 1px solid var(--border);
+      max-width: 860px; margin: 0 auto;
+    }
+
+    /* ── ABOUT CARDS ── */
+    .about-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .about-card {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 20px;
+    }
+    .about-card-icon { font-size: 26px; margin-bottom: 12px; }
+    .about-card-title {
+      font-size: 15px; font-weight: 700; margin-bottom: 6px;
+    }
+    .about-card-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── KANA FEATURE BLOCK ── */
+    .kana-block {
+      background: rgba(124,58,237,0.05);
+      border: 1px solid rgba(124,58,237,0.18);
+      border-radius: 20px; padding: 36px;
+      display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    }
+    .kana-icon {
+      width: 72px; height: 72px; border-radius: 18px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; box-shadow: 0 0 40px rgba(124,58,237,0.4);
+    }
+    .kana-copy { flex: 1; min-width: 200px; }
+    .kana-copy h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px;
+    }
+    .kana-copy p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+    .kana-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+      background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
+      color: #a78bfa;
+    }
+
+    /* ── INTERESTS ── */
+    .interests-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .interest-card {
+      background: rgba(255,255,255,0.025); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .interest-card-icon {
+      width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .interest-card-name { font-size: 13px; font-weight: 600; }
+    .interest-card-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    .contact-block {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; text-align: center;
+    }
+    .contact-block h2 {
+      font-size: 30px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px;
+    }
+    .contact-block p { color: var(--muted); font-size: 15px; margin-bottom: 28px; }
+    .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px; text-align: center;
+      font-size: 12px; color: var(--muted2);
+    }
+
+    /* ── GLOW BG ── */
+    .glow-bg {
+      position: fixed; pointer-events: none; z-index: 0;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 18px; }
+      .hero { padding: 130px 20px 80px; }
+      section { padding: 60px 20px; }
+      .kana-block { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glow-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">harsha.website</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#kana">KANA</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="status-dot"></div>
+    UNT · Varahi · Building in public
+  </div>
+  <h1>Builder.<br /><span>Problem solver.</span><br />Always shipping.</h1>
+  <p class="hero-sub">
+    Computer science student at UNT. Founder of Varahi.
+    Into AI, cybersecurity, and building things that actually work.
+  </p>
+  <div class="hero-actions">
+    <a href="https://kana.harsha.website" class="btn-primary">🤜 Talk to KANA</a>
+    <a href="#about" class="btn-secondary">Learn more →</a>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <div class="section-title">Student. Founder. Builder.</div>
+  <div class="section-sub">
+    I study at UNT by day and build companies by night.
+    Currently focused on AI products and cybersecurity.
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="about-card-icon">🎓</div>
+      <div class="about-card-title">UNT Student</div>
+      <div class="about-card-text">Computer science at the University of North Texas. Turning theory into shipped products.</div>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🏢</div>
+      <div class="about-card-title">Varahi</div>
+      <div class="about-card-text">Founder of Varahi — building tech products that solve real problems.</div>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🔐</div>
+      <div class="about-card-title">Cybersecurity</div>
+      <div class="about-card-text">Deep interest in security, systems, and how things break — so I can build things that don't.</div>
+    </div>
+    <div class="about-card">
+      <div class="about-card-icon">🤖</div>
+      <div class="about-card-title">AI &amp; Automation</div>
+      <div class="about-card-text">Building AI tools that are actually useful — starting with KANA, my personal AI assistant.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- KANA -->
+<section id="kana">
+  <div class="section-label">My AI</div>
+  <div class="section-title">Meet KANA</div>
+  <div class="section-sub">
+    KANA is my personal AI assistant — always online, always ready.
+    Built on Groq + Llama 3, deployed to the cloud.
+  </div>
+  <div class="kana-block">
+    <div class="kana-icon">🤜</div>
+    <div class="kana-copy">
+      <h3>KANA — Your AI Brother</h3>
+      <p>
+        Not a generic chatbot. KANA knows me, my company, my goals.
+        It can build websites, analyze markets, write code, and give real advice —
+        like a brother who happens to know everything.
+      </p>
+      <div class="kana-tags">
+        <span class="tag">Groq API</span>
+        <span class="tag">Llama 3.1</span>
+        <span class="tag">React</span>
+        <span class="tag">Railway</span>
+        <span class="tag">Vercel</span>
+        <span class="tag">Always online</span>
+      </div>
+    </div>
+    <a href="https://kana.harsha.website" class="btn-primary" style="flex-shrink:0">Open KANA →</a>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- INTERESTS -->
+<section>
+  <div class="section-label">What I'm into</div>
+  <div class="section-title">Interests</div>
+  <div class="interests-grid">
+    <div class="interest-card">
+      <div class="interest-card-icon" style="background:rgba(124,58,237,0.12)">🤖</div>
+      <div>
+        <div class="interest-card-name">Artificial Intelligence</div>
+        <div class="interest-card-sub">LLMs, agents, automation</div>
+      </div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-card-icon" style="background:rgba(239,68,68,0.1)">🔐</div>
+      <div>
+        <div class="interest-card-name">Cybersecurity</div>
+        <div class="interest-card-sub">Systems, exploits, defense</div>
+      </div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-card-icon" style="background:rgba(59,130,246,0.1)">⚡</div>
+      <div>
+        <div class="interest-card-name">Full-stack Dev</div>
+        <div class="interest-card-sub">React, Node, cloud deploy</div>
+      </div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-card-icon" style="background:rgba(34,197,94,0.1)">📊</div>
+      <div>
+        <div class="interest-card-name">Markets &amp; Crypto</div>
+        <div class="interest-card-sub">BTC, ETH, on-chain data</div>
+      </div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-card-icon" style="background:rgba(245,158,11,0.1)">🏗️</div>
+      <div>
+        <div class="interest-card-name">Building Companies</div>
+        <div class="interest-card-sub">Varahi and beyond</div>
+      </div>
+    </div>
+    <div class="interest-card">
+      <div class="interest-card-icon" style="background:rgba(168,85,247,0.1)">🚀</div>
+      <div>
+        <div class="interest-card-name">Shipping Fast</div>
+        <div class="interest-card-sub">Idea → deploy in days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-block">
+    <h2>Let's connect.</h2>
+    <p>Building something interesting? Want to collaborate? Reach out.</p>
+    <div class="contact-links">
+      <a href="mailto:basani.hvreddy@gmail.com" class="btn-primary">✉️ Email me</a>
+      <a href="https://kana.harsha.website" class="btn-secondary">🤜 Talk to KANA</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Harsha · harsha.website · Built with KANA ⚡</span>
+</footer>
+
+</body>
+</html>
